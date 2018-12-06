@@ -1,28 +1,20 @@
-const fs = require("fs");
-const _ = require("lodash");
-const ocr = require("./ocr");
+/* eslint import/no-commonjs: [2, { allowRequire: true, allowPrimitiveModules: true }] */
 
-const file = fs.readFileSync("use_case_1_in.txt", { encoding: "utf8" });
-const fileArray = Array.from(file).filter(char => char !== "\n");
-const sequenceArray = _.chunk(fileArray, 108);
+function getChecksum(sequences = [[]]) {
+  return sequences.map(sequence => {
+    const checksum =
+      sequence
+        .reverse()
+        .reduce((acc, digit, index) => acc * digit + (2 + index), 1) % 11;
 
-for (const sequence of sequenceArray) {
-  const accountNumber = ocr(sequence);
-  console.log(accountNumber);
-  const isValidAccountNumber = getChecksum(accountNumber);
-  
-  const account = accountNumber.join("");
+    const accountNumber = sequence.join('');
 
-  if (isValidAccountNumber === 0) {
-    console.log(`It's a valid account number ${account}`);
-  } else {
-    console.log(`It's not a valid account number ${account}`);
-  }
+    return checksum > 0
+      ? `${accountNumber}  ERR`
+      : accountNumber.match(/[?]/g)
+      ? `${accountNumber}  ILL`
+      : accountNumber;
+  }).reduce((acc, sequence) => acc + sequence + '\n', '');
 }
 
-function getChecksum(accountNumber = []) {
-  const positions = accountNumber.reverse();
-  return positions.reduce((acc, digit, index) => {
-    return acc * digit + (2 + index)
-  }, 1) % 11;
-}
+module.exports = getChecksum;

@@ -1,30 +1,34 @@
-const _ = require("lodash");
-const numberData = require("./digit-map");
+/* eslint import/no-commonjs: [2, { allowRequire: true, allowPrimitiveModules: true }] */
+const _ = require('lodash');
+const numberData = require('./digit-map');
 
-function ocr(inputSequence) {
-  let digitsSegments = _.chunk(inputSequence, 3).reverse();
-  digitsSegments.splice(0, 9);
-  digitsSegments = digitsSegments.reverse();
-
-  const digits = [];
-  const size = digitsSegments.length / 3;
-
-  for (let i = 0; i < size; i++) {
-    const firstLine = digitsSegments[i];
-    const secondLine = digitsSegments[i + size];
-    const thirdLine = digitsSegments[i + size * 2];
-
-    digits.push([...firstLine, ...secondLine, ...thirdLine]);
+function ocr(sequences) {
+  if (!(sequences instanceof Array)) {
+    throw new Error('Data is not an array');
   }
 
-  const output = [];
+  return _.chain(sequences)
+    .chunk(108)
+    .map(sequence => {
+      const chunkSequence = _.chain(sequence)
+        .chunk(3)
+        .chunk(9)
+        .value();
 
-  digits.forEach(digit => {
-    let digitString = digit.join("");
-    output.push(numberData[digitString]);
-  });
-
-  return output.reverse();
+      return _.zip(...chunkSequence).map(digit =>
+        _.chain(digit)
+          .flatten()
+          .dropRight(3)
+          .join('')
+          .value()
+      );
+    })
+    .map(sequence =>
+      sequence
+        .map(digit => (digit in numberData ? numberData[digit] : '?'))
+        .reverse()
+    )
+    .value();
 }
 
 module.exports = ocr;
