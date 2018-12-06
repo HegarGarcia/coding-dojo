@@ -1,6 +1,6 @@
 const fs = require("fs");
 const _ = require("lodash");
-const ocr = require("./bank-ocr1");
+const ocr = require("./ocr");
 
 const file = fs.readFileSync("use_case_1_in.txt", { encoding: "utf8" });
 const fileArray = Array.from(file).filter(char => char !== "\n");

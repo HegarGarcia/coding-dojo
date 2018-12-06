@@ -1,5 +1,5 @@
 const _ = require("lodash");
-const numberData = require("./numberMap");
+const numberData = require("./digit-map");
 
 function ocr(inputSequence) {
   let digitsSegments = _.chunk(inputSequence, 3).reverse();
