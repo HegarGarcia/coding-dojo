@@ -1,11 +1,10 @@
 {
   "name": "coding-dojo",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "nodemon bank ./use_case_1_in.txt",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +16,16 @@
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-node": "^4.0.0",
-    "eslint-plugin-import": "^2.14.0"
-  }
+    "eslint-plugin-import": "^2.14.0",
+    "jest": "^23.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HegarGarcia/coding-dojo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/HegarGarcia/coding-dojo/issues"
+  },
+  "homepage": "https://github.com/HegarGarcia/coding-dojo#readme",
+  "description": ""
 }
