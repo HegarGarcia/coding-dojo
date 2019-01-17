@@ -13,11 +13,14 @@
     "lodash": "^4.17.11"
   },
   "devDependencies": {
+    "@types/jest": "^23.3.12",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-node": "^4.0.0",
     "eslint-plugin-import": "^2.14.0",
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.2.2"
   },
   "repository": {
     "type": "git",
