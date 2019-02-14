@@ -1,0 +1,22 @@
+.cell {
+  width: 100px;
+  height: 100px;
+  color: #fff;
+}
+
+.off {
+  background: black;
+}
+
+.on {
+  background: green;
+}
+
+.grid {
+  width: 300px;
+  height: 300px;
+  background: gray;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+}
