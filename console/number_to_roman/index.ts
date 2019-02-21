@@ -23,7 +23,7 @@ const RomanNotation = new Map([
   ['I', 1],
 ]);
 
-function NumberToRoman(value: number) {
+function NumberToRoman(value: number): string {
   if (value > 3999999) {
     throw new Error('Valor debe ser inferior a 3,999,999');
   }
