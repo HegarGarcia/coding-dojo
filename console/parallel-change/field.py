@@ -1,23 +1,20 @@
 class ShoppingCart:
-    price = 0
 
-    '''
-    the goal is to remove the field above, using a list of prices instead:
+    # the goal is to remove the field above, using a list of prices instead:
     def __init__(self):
         self.prices = []
-    '''
-
+    
     def add(self, price):
-        self.price = price
+        self.prices.append(price)
 
     def calculate_total_price(self):
-        return self.price
+        return sum(self.prices)
 
     def has_discount(self):
-        return self.price >= 100
+        return sum(self.prices) >= 100
 
     def number_of_products(self):
-        return 1
+        return len(self.prices)
 
 
 class SomeConsumer():
@@ -30,6 +27,8 @@ class SomeConsumer():
 if __name__ == "__main__":
     shoppingCart = ShoppingCart()
     shoppingCart.add(10)
+    shoppingCart.add(10)
+    shoppingCart.add(80)
     print("number of products:", shoppingCart.number_of_products())
     print("total price:", shoppingCart.calculate_total_price())
     print("has discount:", shoppingCart.has_discount())
